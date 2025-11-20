@@ -1,0 +1,28 @@
+{
+  "name": "calcmaster",
+  "version": "0.1.0",
+  "description": "CalcMaster monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "supabase/functions/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w apps/web",
+    "lint": "npm run lint -w apps/web",
+    "test": "npm run test -w apps/web",
+    "format": "npm run format -w apps/web"
+  },
+  "keywords": [
+    "calc",
+    "education",
+    "supabase",
+    "react",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT"
+}
