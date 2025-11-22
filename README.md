@@ -60,14 +60,93 @@
 
 ## 5. 開発セットアップ
 
+### 5.1. 前提条件
+
+- Node.js 18以上
+- Supabaseアカウント（無料）
+
+### 5.2. Supabaseプロジェクトのセットアップ
+
+1. [Supabase](https://supabase.com)でアカウントを作成し、新しいプロジェクトを作成
+2. プロジェクトのダッシュボードから「SQL Editor」を開く
+3. `supabase/migrations/20250122000000_initial_schema.sql`の内容をコピーして実行
+4. プロジェクトの設定から以下の情報を取得:
+   - Project URL（例: `https://xxxxx.supabase.co`）
+   - Anon/Public Key（例: `eyJhbGc...`）
+
+### 5.3. ローカル開発環境のセットアップ
+
 ```bash
 # 1. リポジトリをクローン
-git clone <repository-url>
+git clone https://github.com/changohi195/CalcMaster.git
 cd CalcMaster
 
 # 2. 依存関係をインストール
 npm install
 
-# 3. 開発サーバーを起動
+# 3. Webアプリケーションのディレクトリに移動
+cd apps/web
+
+# 4. 環境変数ファイルを作成
+cp .env.example .env
+
+# 5. .envファイルを編集してSupabaseの情報を設定
+# VITE_SUPABASE_URL=your_supabase_project_url
+# VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# 6. 開発サーバーを起動
 npm run dev
 ```
+
+開発サーバーが起動したら、ブラウザで http://localhost:5173 にアクセスしてアプリケーションを確認できます。
+
+### 5.4. トラブルシューティング
+
+#### Supabaseへの接続エラー
+- `.env`ファイルに正しいURLとキーが設定されているか確認
+- Supabaseプロジェクトが正しく作成されているか確認
+- マイグレーションSQLが正しく実行されているか確認
+
+#### 認証エラー
+- ブラウザのローカルストレージをクリアして再度ログイン
+- PINは4桁の数字で入力
+
+## 6. プロジェクト構成
+
+```
+CalcMaster/
+├── apps/
+│   └── web/                    # Webアプリケーション
+│       ├── src/
+│       │   ├── components/     # 再利用可能なコンポーネント
+│       │   ├── contexts/       # Reactコンテキスト
+│       │   ├── lib/            # ユーティリティとロジック
+│       │   ├── pages/          # ページコンポーネント
+│       │   └── types/          # TypeScript型定義
+│       └── ...
+├── supabase/
+│   └── migrations/             # データベースマイグレーション
+└── README.md
+```
+
+## 7. 実装済み機能
+
+- ✅ ユーザー登録・ログイン（ニックネーム + PIN）
+- ✅ フリー練習モード
+  - スライダーによる柔軟な難易度設定
+  - 足し算・引き算の切り替え
+  - 繰り上がり・繰り下がりの制御
+- ✅ ゲーミフィケーション機能
+  - リアルタイムスコア
+  - コンボシステム
+  - タイマー
+- ✅ 学習ログの自動記録
+- ✅ ルールベースの苦手分析エンジン
+
+## 8. 今後の実装予定
+
+- 🚧 苦手集中モード（AIサジェスト）
+- 🚧 教師向け分析ダッシュボード
+- 🚧 クラス管理機能
+- 🚧 バッジ・レベルシステム
+- 🚧 リーダーボード
